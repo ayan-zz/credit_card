@@ -5,5 +5,10 @@ statistics
 seaborn
 matplotlib
 setuptools
+dill
+flask
+touch
+pymongo
+datetime
 
 -e .
