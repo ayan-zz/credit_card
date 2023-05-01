@@ -3,6 +3,7 @@ import pandas as pd
 from src.logging import logging
 from src.exception import CustomException
 from sklearn.model_selection import train_test_split
+from src.components.data_transformation import DataTransformation,DataTransformationConfig
 from pymongo import MongoClient
 from dataclasses import dataclass
 
@@ -52,6 +53,9 @@ class dataingestion:
 if __name__=="__main__":
     obj=dataingestion()
     train_data,test_data=obj.initiate_data_ingestion()
+
+    obj_trans=DataTransformation()
+    train_arr,test_arr,_=obj_trans.initiate_data_trasformation(train_data,test_data)
 
         
 

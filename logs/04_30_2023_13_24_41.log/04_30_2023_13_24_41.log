@@ -1,3 +1,0 @@
-[2023-04-30 13:24:47,532]21root-INFO-data ingestion from db started
-[2023-04-30 13:24:52,781]32root-INFO-data ingestion has ended
-[2023-04-30 13:24:53,255]37root-INFO-initializing train test split to split training and testing data
