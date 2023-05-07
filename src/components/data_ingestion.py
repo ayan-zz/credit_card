@@ -1,9 +1,12 @@
 import os,sys
 import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
 from src.logging import logging
 from src.exception import CustomException
 from sklearn.model_selection import train_test_split
-from src.components.data_transformation import DataTransformation,DataTransformationConfig
+from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import modeltrainer
 from pymongo import MongoClient
 from dataclasses import dataclass
 
@@ -56,6 +59,9 @@ if __name__=="__main__":
 
     obj_trans=DataTransformation()
     train_arr,test_arr,_=obj_trans.initiate_data_trasformation(train_data,test_data)
+
+    obj_model=modeltrainer()
+    print(obj_model.initiate_model_training(train_arr,test_arr))
 
         
 

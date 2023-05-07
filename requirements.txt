@@ -10,5 +10,7 @@ flask
 touch
 pymongo
 datetime
+xlrd
+xgboost
 
 -e .

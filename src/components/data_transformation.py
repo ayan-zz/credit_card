@@ -4,7 +4,7 @@ import os,sys
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder,StandardScaler
 from src.utils import save_object
 from src.logging import logging
 from src.exception import CustomException
@@ -26,9 +26,11 @@ class DataTransformation:
                     'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6']
             categorical_col=['SEX', 'EDUCATION', 'MARRIAGE']
 
-            numerical_pipeline=Pipeline(steps=[('imputer',SimpleImputer(strategy='median'))])
-            categorical_pipeline=Pipeline(steps=(['imputer',SimpleImputer(strategy='most_frequent')],
-                                                ['encoder',OneHotEncoder()]))
+            numerical_pipeline=Pipeline(steps=[('imputer',SimpleImputer(strategy='median'))
+                                               ])
+            categorical_pipeline=Pipeline(steps=[('imputer',SimpleImputer(strategy='most_frequent')),
+                                                ('encoder',OneHotEncoder())
+                                                ])
             preprocessor=ColumnTransformer([("numerical_pipeline",numerical_pipeline,numerical_col),
                                             ("categorical_pipeline",categorical_pipeline,categorical_col)])
             return preprocessor
