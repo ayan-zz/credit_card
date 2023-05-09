@@ -24,7 +24,7 @@ class DataTransformation:
             numerical_col=['LIMIT_BAL', 'AGE', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 
                     'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6',
                     'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6']
-            categorical_col=['SEX', 'EDUCATION', 'MARRIAGE']
+            categorical_col=['SEX','EDUCATION', 'MARRIAGE']
 
             numerical_pipeline=Pipeline(steps=[('imputer',SimpleImputer(strategy='median'))
                                                ])
@@ -65,15 +65,29 @@ class DataTransformation:
              
 
             others1=[0,4,5,6]
-            df_train['EDUCATION']=df_train['EDUCATION'].replace(to_replace=others1,value=4)
-            df_test['EDUCATION']=df_test['EDUCATION'].replace(to_replace=others1,value=4) 
+            df_train['EDUCATION']=df_train['EDUCATION'].replace(to_replace=others1,value='others')
+            df_train['EDUCATION']=df_train['EDUCATION'].replace(to_replace=1,value='grad')
+            df_train['EDUCATION']=df_train['EDUCATION'].replace(to_replace=2,value='univ')
+            df_train['EDUCATION']=df_train['EDUCATION'].replace(to_replace=3,value='highscl')
+            df_test['EDUCATION']=df_test['EDUCATION'].replace(to_replace=others1,value='others')
+            df_test['EDUCATION']=df_test['EDUCATION'].replace(to_replace=1,value='grad')
+            df_test['EDUCATION']=df_test['EDUCATION'].replace(to_replace=2,value='univ')
+            df_test['EDUCATION']=df_test['EDUCATION'].replace(to_replace=3,value='highscl') 
             
             others2=[0,3]
-            df_train['MARRIAGE']=df_train['MARRIAGE'].replace(to_replace=others2,value=3)  
-            df_test['MARRIAGE']=df_test['MARRIAGE'].replace(to_replace=others2,value=3) 
-
+            df_train['MARRIAGE']=df_train['MARRIAGE'].replace(to_replace=others2,value='others')  
+            df_train['MARRIAGE']=df_train['MARRIAGE'].replace(to_replace=1,value='married')
+            df_train['MARRIAGE']=df_train['MARRIAGE'].replace(to_replace=2,value='single')
+            df_test['MARRIAGE']=df_test['MARRIAGE'].replace(to_replace=others2,value='others')
+            df_test['MARRIAGE']=df_test['MARRIAGE'].replace(to_replace=1,value='married')
+            df_test['MARRIAGE']=df_test['MARRIAGE'].replace(to_replace=2,value='single')
             target_feature_train_df=df_train[target_col_name]
             target_feature_test_df=df_test[target_col_name]
+
+            df_train['SEX']=df_train['SEX'].replace(to_replace=2,value='female')
+            df_train['SEX']=df_train['SEX'].replace(to_replace=1,value='male')
+            df_test['SEX']=df_test['SEX'].replace(to_replace=2,value='female')
+            df_test['SEX']=df_test['SEX'].replace(to_replace=1,value='male')
 
             input_feature_train_df=df_train.drop(columns=['ID','default payment next month'],axis=1)
             input_feature_test_df=df_test.drop(columns=['ID','default payment next month'],axis=1)
